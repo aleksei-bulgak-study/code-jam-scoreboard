@@ -1,0 +1,42 @@
+{
+  "name": "lodash-playground",
+  "version": "1.0.0",
+  "description": "Test project to play and train skills in  lodash",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "eslint src/dataLoader/*.js",
+    "test": "jest --coverage",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
+  "keywords": [
+    "rss",
+    "lodash"
+  ],
+  "author": "Aleksei Bulgak",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^7.1.3",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "css-loader": "^1.0.1",
+    "node-fetch": "^2.3.0",
+    "regenerator-runtime": "^0.13.1",
+    "style-loader": "^0.23.1",
+    "stylelint": "^8.0.0",
+    "stylelint-config-airbnb": "0.0.0",
+    "stylelint-order": "^0.7.0",
+    "stylelint-scss": "^1.2.1",
+    "stylelint-webpack-plugin": "^0.10.5",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
