@@ -2,7 +2,7 @@
   "name": "lodash-playground",
   "version": "1.0.0",
   "description": "Test project to play and train skills in  lodash",
-  "main": "./src/index.js",
+  "main": "./src/main.js",
   "scripts": {
     "lint": "eslint src/dataLoader/*.js",
     "test": "jest --coverage",
