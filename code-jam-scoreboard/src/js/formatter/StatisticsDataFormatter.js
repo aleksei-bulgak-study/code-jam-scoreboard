@@ -5,9 +5,12 @@ export default class StatisticsDataFormatter {
     const users = this._parseUsers(data[0]);
     const session = data[1][0];
     _.forEach(users, (user) => {
+      const answers = this._filterUserAnswers(user.id, session);
+      const overalTime = this._calculateOveralTime(answers);
       user.session = [{
+        answers,
+        overalTime,
         name: session.game,
-        answers: this._filterUserAnswers(user.id, session),
       }];
     });
     return {
@@ -39,5 +42,10 @@ export default class StatisticsDataFormatter {
       }
     });
     return results;
+  }
+
+  _calculateOveralTime(userAnswers) {
+    return _.reduce(userAnswers,
+      (sum, answer) => sum + Number.parseInt(answer.time.$numberLong, 10), 0);
   }
 }

@@ -33,6 +33,10 @@ export default class TableViewBuilder {
       headRow.append(th);
     });
 
+    const overalColumn = document.createElement('th');
+    overalColumn.innerText = 'Overal time';
+    headRow.append(overalColumn);
+
     const checkboxColumn = document.createElement('th');
     checkboxColumn.innerText = 'Append to chart';
     headRow.append(checkboxColumn);
@@ -55,6 +59,7 @@ export default class TableViewBuilder {
     _.each(user.session[0].answers, (answer) => {
       row.append(this._createTableRow(answer.time.$numberLong, answer.code));
     });
+    row.append(this._createTableRow(user.session[0].overalTime));
     row.append(this._buildCheckBox());
     body.append(row);
   }
