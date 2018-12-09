@@ -1,0 +1,121 @@
+[
+  {
+    "_id": {
+      "$oid": "5bfc37a47d53b900214ad01c"
+    },
+    "provider": "github",
+    "uid": "a58dc9923e939274",
+    "providerId": "669784",
+    "displayName": "Alexander Gerasimov",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a47d53b900214ad01d"
+    },
+    "provider": "github",
+    "uid": "31651a29bc0d64b4",
+    "providerId": "3236551",
+    "displayName": "Kiril Knysh",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a47d53b900214ad01e"
+    },
+    "provider": "github",
+    "uid": "dd71f935e8bb4e97",
+    "providerId": "6017041",
+    "displayName": "Maksim Shastsel",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a47d53b900214ad01f"
+    },
+    "provider": "github",
+    "uid": "1724c4cf0ce40819",
+    "providerId": "6261302",
+    "displayName": "Andrei Lesnitsky",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a47d53b900214ad020"
+    },
+    "provider": "github",
+    "uid": "e6a98855bb904519",
+    "providerId": "8556149",
+    "displayName": "Andrei Yanovich",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a47d53b900214ad021"
+    },
+    "provider": "github",
+    "uid": "0ab92636940aab10",
+    "providerId": "14282222",
+    "displayName": "Vladimir Galushko",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a47d53b900214ad022"
+    },
+    "provider": "github",
+    "uid": "7add08c905ae8661",
+    "providerId": "12843",
+    "displayName": "Alex K",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a77d53b900214ad023"
+    },
+    "provider": "github",
+    "uid": "70c2126a27a7ff92",
+    "providerId": "43150373",
+    "displayName": "CuppaKe",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a77d53b900214ad024"
+    },
+    "provider": "github",
+    "uid": "79d3d5a874c0fedb",
+    "providerId": "20907230",
+    "displayName": "Denis Mailychko",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a77d53b900214ad025"
+    },
+    "provider": "github",
+    "uid": "3549c28b38369744",
+    "providerId": "43237947",
+    "displayName": "Dmitry",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a87d53b900214ad026"
+    },
+    "provider": "github",
+    "uid": "50f3b5f06c1d21a1",
+    "providerId": "36860438",
+    "displayName": "Igor",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "5bfc37a87d53b900214ad027"
+    },
+    "provider": "github",
+    "uid": "9eb7f3047b78db41",
+    "providerId": "30537240",
+    "displayName": "Philip",
+    "__v": 0
+  }]
