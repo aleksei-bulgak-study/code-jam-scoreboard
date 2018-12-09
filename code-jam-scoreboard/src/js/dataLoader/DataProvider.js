@@ -1,5 +1,6 @@
 export default class DataProvider {
-  constructor(dataFormatter, userDataUrl, sessionDataUrl, previousYearSessionDataUrl, previousYearUserDataUrl) {
+  constructor(dataFormatter, userDataUrl, sessionDataUrl, previousYearSessionDataUrl,
+    previousYearUserDataUrl) {
     this.dataFormatter = dataFormatter;
 
     this.userDataUrl = userDataUrl;

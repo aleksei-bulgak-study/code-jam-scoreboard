@@ -76,7 +76,7 @@ export default class ChartViewBuilder {
           yAxes: [{
             ticks: {
               beginAtZero: true,
-              max: 150,
+              max: 155,
             },
           }],
         },

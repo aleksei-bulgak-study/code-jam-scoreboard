@@ -4,7 +4,7 @@
   "description": "Test project to play and train skills in  lodash",
   "main": "./src/main.js",
   "scripts": {
-    "lint": "eslint src/dataLoader/*.js",
+    "lint": "eslint src/js/*.js src/**/*.js",
     "test": "jest --coverage",
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch"

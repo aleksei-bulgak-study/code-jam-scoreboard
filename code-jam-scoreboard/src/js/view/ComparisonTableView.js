@@ -48,7 +48,7 @@ export default class ComparisonTableView {
     headRow.append(overalColumn);
 
     const checkboxColumn = document.createElement('th');
-    checkboxColumn.innerText = 'Append to chart';
+    checkboxColumn.innerText = 'Comparison';
     headRow.append(checkboxColumn);
 
     head.append(headRow);

@@ -53,7 +53,7 @@ export default class TableViewBuilder {
     headRow.append(overalColumn);
 
     const checkboxColumn = document.createElement('th');
-    checkboxColumn.innerText = 'Append to chart';
+    checkboxColumn.innerText = 'Comparison';
     headRow.append(checkboxColumn);
 
     head.append(headRow);
