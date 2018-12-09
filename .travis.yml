@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - "7"
+
+cache: npm
+
+branches:
+  except:
+    - legacy
+    - experimental
+
+before_install:
+  - cd code-jam-scoreboard/  
+
+install:
+  - npm install
+
+script:
+  - npm run lint
+  - npm run test
+  - npm run build
+
+deploy:
+  local-dir: ./code-jam-scoreboard/dist
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep-history: true
+  on:
+    branch: code-jam-scoreboard

@@ -117,20 +117,32 @@ export default class ComparisonTableView {
   _checkboxClickedEvent(event) {
     if (event && event.target.getAttribute('type') === 'checkbox') {
       document.body.dispatchEvent(new CustomEvent('clear'));
-      const { id } = event.target.closest('tr');
-      const user = _.find(this.data.users, ['id', id]);
-      document.body.dispatchEvent(new CustomEvent('addToChart', {
-        detail: {
-          name: 'q1',
-          session: [{ answers: user.session[0].answers }],
-        },
-      }));
-      document.body.dispatchEvent(new CustomEvent('addToChart', {
-        detail: {
-          name: 'q3',
-          session: [{ answers: user.session[1].answers }],
-        },
-      }));
+      if (event.target.checked) {
+        this._deselectOtherUsers(event.target);
+        const { id } = event.target.closest('tr');
+        const user = _.find(this.data.users, ['id', id]);
+        document.body.dispatchEvent(new CustomEvent('addToChart', {
+          detail: {
+            name: 'q1',
+            session: [{ answers: user.session[0].answers }],
+          },
+        }));
+        document.body.dispatchEvent(new CustomEvent('addToChart', {
+          detail: {
+            name: 'q3',
+            session: [{ answers: user.session[1].answers }],
+          },
+        }));
+      }
     }
+  }
+
+  _deselectOtherUsers(userCheckbox) {
+    const checkboxes = document.querySelectorAll('input[type=checkbox]');
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked && checkbox !== userCheckbox) {
+        checkbox.checked = false;
+      }
+    });
   }
 }
