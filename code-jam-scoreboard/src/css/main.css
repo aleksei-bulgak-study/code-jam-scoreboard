@@ -25,9 +25,25 @@ table>tbody>tr:hover {
 }
 
 table td {
+  position: relative;
   padding: 10px 15px;
   color: #666699;
   border-top: 1px solid #e8edff;
+}
+
+table td::after {
+  content: attr(title);
+  position: absolute;
+  border-radius: 5px;
+  background-color: #d9f0f66e;
+  margin-top: -24px;
+  padding: 3px 7px;
+  white-space: nowrap;
+  visibility: hidden;
+}
+
+table td:hover::after {
+  visibility: visible;
 }
 
 table td:first-child {

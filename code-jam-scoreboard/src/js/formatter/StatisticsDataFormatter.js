@@ -34,7 +34,7 @@ export default class StatisticsDataFormatter {
       const results = [];
       _.forEach(session.rounds, (round, index) => {
         const solution = round.solutions[userId];
-        if (solution) {
+        if (solution && solution.correct === 'Correct') {
           results.push(solution);
         } else {
           results.push({

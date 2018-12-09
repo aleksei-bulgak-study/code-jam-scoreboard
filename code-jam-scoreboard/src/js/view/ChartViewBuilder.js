@@ -33,9 +33,11 @@ export default class ChartViewBuilder {
 
   _appendToChart(event) {
     const user = event.detail;
+    const color = randomcolor();
     this.chart.data.datasets.push({
       label: user.name,
-      borderColor: randomcolor(),
+      borderColor: color,
+      backgroundColor: color,
       data: this._getUserStatistics(user),
       fill: false,
     });

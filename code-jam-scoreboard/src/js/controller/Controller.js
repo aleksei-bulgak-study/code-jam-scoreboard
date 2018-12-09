@@ -13,7 +13,6 @@ export default class ApplicationController {
       .loadData()
       .then(arrayOfResults => this.statisticsDataFormatter.processUserData(arrayOfResults))
       .then((data) => {
-        this.data = data;
         this.tableViewBuilder.withData(data).build();
         return data;
       })
