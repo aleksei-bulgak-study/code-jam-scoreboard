@@ -9,11 +9,12 @@ import ChartViewBuilder from './view/ChartViewBuilder';
 
 const USER_DATA = 'https://raw.githubusercontent.com/aleksei-bulgak-study/data/master/users.json';
 const SESSIONS_DATA = 'https://raw.githubusercontent.com/aleksei-bulgak-study/data/master/sessions.json';
+const MAX_NUMBERS_OF_USERS_ON_CHART = 10;
 
 const dataProvider = new DataProvider(null, USER_DATA, SESSIONS_DATA);
 const statisticsDataFormatter = new StatisticsDataFormatter();
 
-const tableView = new TableViewBuilder();
+const tableView = new TableViewBuilder(MAX_NUMBERS_OF_USERS_ON_CHART);
 const chartView = new ChartViewBuilder();
 
 const app = new ApplicationController(dataProvider, statisticsDataFormatter, tableView, chartView);

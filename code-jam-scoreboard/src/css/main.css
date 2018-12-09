@@ -16,6 +16,10 @@ table th {
   color: #073899;
 }
 
+table th:first-child {
+  text-align: left;
+}
+
 table>tbody>tr:hover {
   background-color: #becaf8;
 }

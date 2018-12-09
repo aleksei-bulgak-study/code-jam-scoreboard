@@ -3,19 +3,21 @@ import * as _ from 'lodash';
 export default class StatisticsDataFormatter {
   processUserData(data) {
     const users = this._parseUsers(data[0]);
-    const session = data[1][0];
-    _.forEach(users, (user) => {
-      const answers = this._filterUserAnswers(user.id, session);
-      const overalTime = this._calculateOveralTime(answers);
-      user.session = [{
-        answers,
-        overalTime,
-        name: session.game,
-      }];
+    _.each(users, (user) => {
+      user.session = [];
+      _.each((data[1]), (session) => {
+        const answers = this._filterUserAnswers(user.id, session);
+        const overalTime = this._calculateOveralTime(answers);
+        user.session.push({
+          answers,
+          overalTime,
+          name: session.game,
+        });
+      });
     });
     return {
       users,
-      puzzles: session.puzzles,
+      puzzles: data[1],
     };
   }
 
@@ -28,24 +30,37 @@ export default class StatisticsDataFormatter {
   }
 
   _filterUserAnswers(userId, session) {
-    const results = [];
-    _.forEach(session.rounds, (round, index) => {
-      const solution = round.solutions[userId];
-      if (solution) {
-        results.push(solution);
-      } else {
-        results.push({
-          time: {
-            $numberLong: session.puzzles[index].options.timeLimit.$numberLong,
-          },
-        });
-      }
-    });
-    return results;
+    if (session.rounds && session.rounds.length > 0) {
+      const results = [];
+      _.forEach(session.rounds, (round, index) => {
+        const solution = round.solutions[userId];
+        if (solution) {
+          results.push(solution);
+        } else {
+          results.push({
+            time: {
+              $numberLong: session.puzzles[index].options.timeLimit.$numberLong,
+            },
+          });
+        }
+      });
+      return results;
+    }
+    return this._populateWithEmptyResults(userId, session);
   }
 
   _calculateOveralTime(userAnswers) {
     return _.reduce(userAnswers,
       (sum, answer) => sum + Number.parseInt(answer.time.$numberLong, 10), 0);
+  }
+
+  _populateWithEmptyResults(userId, session) {
+    const results = [];
+    _.each(session.puzzles, puzzler => results.push({
+      time: {
+        $numberLong: puzzler.options.timeLimit.$numberLong,
+      },
+    }));
+    return results;
   }
 }
