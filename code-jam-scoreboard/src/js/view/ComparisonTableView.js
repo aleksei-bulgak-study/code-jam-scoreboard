@@ -1,10 +1,6 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 
-export default class TableViewBuilder {
-  constructor(maxUsersForSelection) {
-    this.maxUsersForSelection = maxUsersForSelection;
-  }
-
+export default class ComparisonTableView {
   withData(data) {
     this.data = data;
     return this;
@@ -18,7 +14,7 @@ export default class TableViewBuilder {
     }
   }
 
-  build(sessionId = 0) {
+  build() {
     if (!this.data) {
       throw new Error('Data was not passed to builder object');
     }
@@ -26,14 +22,13 @@ export default class TableViewBuilder {
     this.clean();
 
     const fragment = document.createDocumentFragment();
-    this._populateBaseTableInfo(fragment, sessionId);
-    this._populateUserStatistics(fragment, sessionId);
+    this._populateBaseTableInfo(fragment);
+    this._populateUserStatistics(fragment);
     this._addEventListeners(fragment);
     document.body.append(fragment);
-    return this.data;
   }
 
-  _populateBaseTableInfo(fragment, sessionId) {
+  _populateBaseTableInfo(fragment) {
     const table = document.createElement('table');
     const head = document.createElement('thead');
     const headRow = document.createElement('tr');
@@ -42,7 +37,7 @@ export default class TableViewBuilder {
     gitHubColumn.innerText = 'Github';
     headRow.append(gitHubColumn);
 
-    _.each(this.data.puzzles[sessionId].puzzles, (puzzler) => {
+    _.each(this.data.puzzles[0].puzzles, (puzzler) => {
       const th = document.createElement('th');
       th.innerText = puzzler.name;
       headRow.append(th);
@@ -61,21 +56,38 @@ export default class TableViewBuilder {
     fragment.append(table);
   }
 
-  _populateUserStatistics(fragment, sessionId) {
+  _populateUserStatistics(fragment) {
     const body = document.createElement('tbody');
-    _.each(this.data.users, this._appendUserToTable.bind(this, body, sessionId));
+    _.each(this.data.users, this._appendUserToTable.bind(this, body));
     fragment.querySelector('table').append(body);
   }
 
-  _appendUserToTable(body, sessionId, user) {
+  _appendUserToTable(body, user) {
     const row = document.createElement('tr');
     row.id = user.id;
-    row.append(this._createTableRow(user.name));
-    _.each(user.session[sessionId].answers, (answer) => {
-      row.append(this._createTableRow(answer.time.$numberLong, answer.code, 'tooltip'));
+
+    const github = this._createTableRow(user.name);
+    github.setAttribute('rowspan', 2);
+    row.append(github);
+
+    _.each(user.session[0].answers, (answer) => {
+      row.append(this._createTableRow(answer.time.$numberLong, answer.code));
     });
-    row.append(this._createTableRow(user.session[sessionId].overalTime));
+    row.append(this._createTableRow(user.session[0].overalTime));
+
     row.append(this._buildCheckBox());
+    body.append(row);
+
+    this._appendPreviousResults(body, user);
+  }
+
+  _appendPreviousResults(body, user) {
+    const row = document.createElement('tr');
+    row.name = user.id;
+    _.each(user.session[1].answers, (answer) => {
+      row.append(this._createTableRow(answer.time.$numberLong, answer.code, 'center'));
+    });
+    row.append(this._createTableRow(user.session[1].overalTime));
     body.append(row);
   }
 
@@ -93,6 +105,7 @@ export default class TableViewBuilder {
     const input = document.createElement('input');
     input.setAttribute('type', 'checkbox');
     const td = this._createTableRow(null);
+    td.setAttribute('rowspan', 2);
     td.append(input);
     return td;
   }
@@ -103,22 +116,21 @@ export default class TableViewBuilder {
 
   _checkboxClickedEvent(event) {
     if (event && event.target.getAttribute('type') === 'checkbox') {
+      document.body.dispatchEvent(new CustomEvent('clear'));
       const { id } = event.target.closest('tr');
       const user = _.find(this.data.users, ['id', id]);
-      const eventName = event.target.checked ? 'addToChart' : 'removeFromChart';
-      document.body.dispatchEvent(new CustomEvent(eventName, { detail: user }));
+      document.body.dispatchEvent(new CustomEvent('addToChart', {
+        detail: {
+          name: 'q1',
+          session: [{ answers: user.session[0].answers }],
+        },
+      }));
+      document.body.dispatchEvent(new CustomEvent('addToChart', {
+        detail: {
+          name: 'q3',
+          session: [{ answers: user.session[1].answers }],
+        },
+      }));
     }
-    this._blockSelection(this._isMaxAllowedNumberOfUsersSelected());
-  }
-
-  _isMaxAllowedNumberOfUsersSelected() {
-    return document.querySelectorAll('input[type=checkbox]:checked').length >= this.maxUsersForSelection;
-  }
-
-  _blockSelection(block) {
-    _.each(
-      _.filter(document.querySelectorAll('input[type=checkbox]'), checkbox => !checkbox.checked),
-      (checkbox) => { checkbox.disabled = block; },
-    );
   }
 }

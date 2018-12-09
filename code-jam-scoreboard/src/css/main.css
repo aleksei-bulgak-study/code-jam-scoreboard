@@ -31,7 +31,7 @@ table td {
   border-top: 1px solid #e8edff;
 }
 
-table td::after {
+table td.tooltip::after {
   content: attr(title);
   position: absolute;
   border-radius: 5px;
@@ -42,12 +42,16 @@ table td::after {
   visibility: hidden;
 }
 
-table td:hover::after {
+table td.tooltip:hover::after {
   visibility: visible;
 }
 
 table td:first-child {
   text-align: left;
+}
+
+table td.center:first-child {
+  text-align: center;
 }
 
 table tr:nth-child(2n) {

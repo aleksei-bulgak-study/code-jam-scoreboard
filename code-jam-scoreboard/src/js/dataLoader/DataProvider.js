@@ -1,17 +1,24 @@
 export default class DataProvider {
-  constructor(dataFormatter, userDataUrl, sessionDataUrl, previousYearDataUrl) {
+  constructor(dataFormatter, userDataUrl, sessionDataUrl, previousYearSessionDataUrl, previousYearUserDataUrl) {
     this.dataFormatter = dataFormatter;
 
     this.userDataUrl = userDataUrl;
     this.sessionDataUrl = sessionDataUrl;
-    this.previousYearDataUrl = previousYearDataUrl;
+    this.previousYearSessionDataUrl = previousYearSessionDataUrl;
+    this.previousYearUserDataUrl = previousYearUserDataUrl;
   }
 
   loadData() {
     return Promise.all([
       this._load(this.userDataUrl),
       this._load(this.sessionDataUrl),
-      this._load(this.previousYearDataUrl),
+    ]);
+  }
+
+  loadPreviousGroup() {
+    return Promise.all([
+      this._load(this.previousYearUserDataUrl),
+      this._load(this.previousYearSessionDataUrl),
     ]);
   }
 

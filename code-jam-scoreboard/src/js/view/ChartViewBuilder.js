@@ -6,6 +6,7 @@ export default class ChartViewBuilder {
   constructor() {
     document.body.addEventListener('addToChart', this._appendToChart.bind(this));
     document.body.addEventListener('removeFromChart', this._removeFromChart.bind(this));
+    document.body.addEventListener('clear', this._clearChart.bind(this));
   }
 
   withData(data) {
@@ -29,6 +30,7 @@ export default class ChartViewBuilder {
     document.body.append(chart);
 
     this._buildChart(chart.getContext('2d'));
+    return this.data;
   }
 
   _appendToChart(event) {
@@ -49,6 +51,11 @@ export default class ChartViewBuilder {
     const indexForDeletion = _.findIndex(this.chart.data.datasets,
       line => line.label === userInEvent.name);
     this.chart.data.datasets.splice(indexForDeletion, 1);
+    this.chart.update();
+  }
+
+  _clearChart() {
+    this.chart.data.datasets = [];
     this.chart.update();
   }
 
