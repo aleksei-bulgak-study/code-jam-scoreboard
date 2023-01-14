@@ -40,7 +40,7 @@
     "stylelint-scss": "^1.2.1",
     "stylelint-webpack-plugin": "^0.10.5",
     "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "chart.js": "^2.7.3",
